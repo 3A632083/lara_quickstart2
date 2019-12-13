@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Task;
+use Auth;
 
 class TaskController extends Controller
 {
@@ -10,9 +12,21 @@ class TaskController extends Controller
     {
         $this->middleware('auth');
     }
+//    public function index(Request $request)
+//    {
+//        return view('tasks.index');
+//    }
     public function index(Request $request)
     {
-        return view('tasks.index');
+        $tasks = Task::where('user_id', $request->user()->id)->get();
+//        $tasks= auth()->user()->tasks;
+//        $tasks= auth()->user()->tasks()->get();
+//        $tasks=Auth::user()->tasks;
+//        $tasks=Auth::user()->tasks()->get();
+
+        return view('tasks.index', [
+            'tasks' => $tasks,
+        ]);
     }
     public function store(Request $request)
     {
