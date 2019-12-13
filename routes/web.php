@@ -10,15 +10,15 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::auth();
 Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+//Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 // 認證路由...
-Route::auth();
+
 
 Route::get('/tasks', 'TaskController@index');
 Route::post('/task', 'TaskController@store');
